@@ -1,0 +1,91 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Product {
+  id          String   @id @default(cuid())
+  name        String
+  category    String
+  description String
+  images      String   // JSON string array
+  priceMin    Int
+  priceMax    Int
+  materials   String   // JSON string array
+  featured    Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([category])
+  @@index([featured])
+}
+
+model Project {
+  id             String   @id @default(cuid())
+  title          String
+  category       String
+  description    String
+  location       String
+  afterImage     String
+  images         String   // JSON string array
+  clientName     String?
+  testimonial    String?
+  featured       Boolean  @default(false)
+  completionDate DateTime
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@index([category])
+  @@index([featured])
+}
+
+model Testimonial {
+  id          String   @id @default(cuid())
+  name        String
+  role        String
+  image       String?
+  rating      Int
+  comment     String
+  projectType String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([rating])
+}
+
+model Inquiry {
+  id          String   @id @default(cuid())
+  name        String
+  email       String
+  phone       String
+  subject     String
+  message     String
+  projectType String?
+  budget      String?
+  status      String   @default("new") // new, contacted, quoted, closed
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([status])
+  @@index([createdAt])
+}
+
+// For future admin authentication
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String
+  password  String   // hashed password
+  role      String   @default("admin") // admin, editor, viewer
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([email])
+}

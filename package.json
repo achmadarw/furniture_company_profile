@@ -1,0 +1,52 @@
+{
+    "name": "furniture-company",
+    "version": "1.0.0",
+    "private": true,
+    "scripts": {
+        "dev": "next dev -p 3008",
+        "build": "next build",
+        "start": "next start",
+        "lint": "next lint",
+        "db:seed": "npx tsx prisma/seed.ts",
+        "db:migrate": "prisma migrate dev",
+        "db:studio": "prisma studio",
+        "create:admin": "node scripts/create-admin.js"
+    },
+    "prisma": {
+        "seed": "npx tsx prisma/seed.ts"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "description": "",
+    "dependencies": {
+        "@hookform/resolvers": "^5.2.2",
+        "@prisma/client": "^5.22.0",
+        "@types/node": "^24.10.1",
+        "@types/react": "^19.2.7",
+        "bcryptjs": "^3.0.3",
+        "cloudinary": "^2.8.0",
+        "framer-motion": "^12.23.25",
+        "lucide-react": "^0.556.0",
+        "next": "^16.0.7",
+        "next-auth": "^5.0.0-beta.30",
+        "next-cloudinary": "^6.17.5",
+        "nodemailer": "^7.0.11",
+        "prisma": "^5.22.0",
+        "react": "^19.2.1",
+        "react-dom": "^19.2.1",
+        "react-hook-form": "^7.68.0",
+        "react-hot-toast": "^2.6.0",
+        "swiper": "^12.0.3",
+        "typescript": "^5.9.3",
+        "zod": "^4.1.13"
+    },
+    "devDependencies": {
+        "@types/bcryptjs": "^3.0.0",
+        "@types/nodemailer": "^7.0.4",
+        "autoprefixer": "^10.4.20",
+        "postcss": "^8.4.47",
+        "tailwindcss": "^3.4.14",
+        "tsx": "^4.21.0"
+    }
+}
