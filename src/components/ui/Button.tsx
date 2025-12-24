@@ -6,6 +6,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     variant?: 'primary' | 'secondary' | 'outline' | 'ghost';
     size?: 'sm' | 'md' | 'lg';
     isLoading?: boolean;
+    fullWidth?: boolean;
     children: React.ReactNode;
 }
 
@@ -15,6 +16,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
             variant = 'primary',
             size = 'md',
             isLoading = false,
+            fullWidth = false,
             children,
             className = '',
             disabled,
@@ -44,7 +46,9 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         return (
             <button
                 ref={ref}
-                className={`${baseStyles} ${variants[variant]} ${sizes[size]} ${className}`}
+                className={`${baseStyles} ${variants[variant]} ${sizes[size]} ${
+                    fullWidth ? 'w-full' : ''
+                } ${className}`}
                 disabled={disabled || isLoading}
                 {...props}
             >
