@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Phone, Mail } from 'lucide-react';
 import Button from '@/components/ui/Button';
@@ -19,6 +20,10 @@ const navigation = [
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
+    const pathname = usePathname();
+
+    // Check if current page is homepage
+    const isHomepage = pathname === '/';
 
     useEffect(() => {
         const handleScroll = () => {
@@ -29,10 +34,16 @@ export default function Navbar() {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
+    // Determine navbar background and text colors
+    const isTransparent = isHomepage && !isScrolled;
+    const navbarBg = isTransparent ? 'bg-transparent' : 'bg-white shadow-md';
+    const textColor = isTransparent ? 'text-white' : 'text-secondary-700';
+    const logoTextColor = isTransparent ? 'text-white' : 'text-secondary-900';
+
     return (
         <nav
-            className={`fixed w-full z-50 transition-all duration-300 ${
-                isScrolled ? 'bg-white shadow-md py-4' : 'bg-transparent py-6'
+            className={`fixed w-full z-50 transition-all duration-300 ${navbarBg} ${
+                isTransparent ? 'py-6' : 'py-4'
             }`}
         >
             <div className='container-custom'>
@@ -44,11 +55,7 @@ export default function Navbar() {
                                 PK
                             </span>
                         </div>
-                        <span
-                            className={`font-bold text-xl ${
-                                isScrolled ? 'text-secondary-900' : 'text-white'
-                            }`}
-                        >
+                        <span className={`font-bold text-xl ${logoTextColor}`}>
                             Premium Kitchen
                         </span>
                     </Link>
@@ -59,11 +66,7 @@ export default function Navbar() {
                             <Link
                                 key={item.name}
                                 href={item.href}
-                                className={`font-medium transition-colors hover:text-primary-600 ${
-                                    isScrolled
-                                        ? 'text-secondary-700'
-                                        : 'text-white'
-                                }`}
+                                className={`font-medium transition-colors hover:text-primary-600 ${textColor}`}
                             >
                                 {item.name}
                             </Link>
@@ -74,18 +77,10 @@ export default function Navbar() {
                     <div className='hidden lg:flex items-center space-x-4'>
                         <a
                             href='tel:+6281234567890'
-                            className='flex items-center space-x-2 text-secondary-700 hover:text-primary-600 transition-colors'
+                            className={`flex items-center space-x-2 hover:text-primary-600 transition-colors ${textColor}`}
                         >
                             <Phone className='w-4 h-4' />
-                            <span
-                                className={
-                                    isScrolled
-                                        ? 'text-secondary-700'
-                                        : 'text-white'
-                                }
-                            >
-                                +62 812-3456-7890
-                            </span>
+                            <span>+62 812-3456-7890</span>
                         </a>
                         <Button variant='primary' size='sm'>
                             Konsultasi Gratis
@@ -98,21 +93,9 @@ export default function Navbar() {
                         className='lg:hidden p-2'
                     >
                         {isOpen ? (
-                            <X
-                                className={`w-6 h-6 ${
-                                    isScrolled
-                                        ? 'text-secondary-900'
-                                        : 'text-white'
-                                }`}
-                            />
+                            <X className={`w-6 h-6 ${logoTextColor}`} />
                         ) : (
-                            <Menu
-                                className={`w-6 h-6 ${
-                                    isScrolled
-                                        ? 'text-secondary-900'
-                                        : 'text-white'
-                                }`}
-                            />
+                            <Menu className={`w-6 h-6 ${logoTextColor}`} />
                         )}
                     </button>
                 </div>

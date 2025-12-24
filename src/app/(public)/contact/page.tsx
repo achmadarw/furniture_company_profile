@@ -25,6 +25,18 @@ type ContactFormData = z.infer<typeof contactSchema>;
 export default function ContactPage() {
     const [isSubmitting, setIsSubmitting] = useState(false);
 
+    // WhatsApp configuration
+    const whatsappNumber = '6281234567890'; // Format: country code + number (no +, no spaces)
+    const whatsappMessage =
+        'Halo Premium Kitchen! Saya tertarik untuk konsultasi mengenai furniture.';
+
+    const openWhatsApp = () => {
+        const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
+            whatsappMessage
+        )}`;
+        window.open(url, '_blank');
+    };
+
     const {
         register,
         handleSubmit,
@@ -167,7 +179,12 @@ export default function ContactPage() {
                                     Hubungi kami langsung via WhatsApp untuk
                                     respons lebih cepat
                                 </p>
-                                <Button variant='primary' className='w-full'>
+                                <Button
+                                    variant='primary'
+                                    className='w-full'
+                                    onClick={openWhatsApp}
+                                    type='button'
+                                >
                                     <MessageCircle className='mr-2 w-5 h-5' />
                                     Chat WhatsApp
                                 </Button>

@@ -161,7 +161,7 @@ TOTAL: Rp ${totalPrice.toLocaleString('id-ID')}
     };
 
     return (
-        <div className='max-w-7xl mx-auto px-4 py-12'>
+        <div className='max-w-7xl mx-auto px-4 pt-32 pb-12'>
             <div className='text-center mb-12'>
                 <h1 className='text-4xl font-bold text-gray-900 mb-4'>
                     Kitchen Set Customizer
@@ -501,8 +501,7 @@ TOTAL: Rp ${totalPrice.toLocaleString('id-ID')}
                         <Button
                             onClick={handleRequestQuote}
                             variant='secondary'
-                            fullWidth
-                            className='bg-white text-primary-600 hover:bg-gray-100 font-bold py-3'
+                            className='w-full bg-white text-primary-600 hover:bg-gray-100 font-bold py-3'
                         >
                             Request Quote
                         </Button>
