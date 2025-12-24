@@ -232,8 +232,8 @@ export async function addTestimonial(
     const testimonial = await prisma.testimonial.create({
         data: {
             name: data.name,
-            role: data.role,
-            image: data.image,
+            role: data.role || '',
+            image: data.image || '',
             rating: data.rating,
             comment: data.comment,
             projectType: data.projectType,
